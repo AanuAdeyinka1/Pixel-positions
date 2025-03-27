@@ -1,19 +1,26 @@
+@props(['job'])
+
 <div class="p-4 bg-white/5 rounded-xl flex flex-col text-center border border-transparent hover:border-blue-800 group transition-colors duration-200">
         
-    <div class="self-start text-sm">Brento</div>
+    <div class="self-start text-sm"> {{ $job->employer->name}} </div>
     <div class="py-5 ">
-        <h3 class="group-hover:text-blue-800 text-xl font-bold transition-colors duration-200">Video Producer</h3>
-        <p class="text-sm mt-4">Full Time - From $60,000</p>
+        <h3 class="group-hover:text-blue-800 text-xl font-bold transition-colors duration-200">
+            <a href="{{$job->url}}" target="_blank">
+                 {{$job->title}} 
+            </a>
+        </h3>
+        <p class="text-sm mt-4"> {{ $job->salary}} </p>
     </div>
 
-    <div class="flex justify-between items-center mt-auto">
-        <div >
-        <x-tag>Tag</x-tag>
-        <x-tag>Tag</x-tag>
-        <x-tag>Tag</x-tag>
+    <div class="flex justify-between items-center mt-auto ">
+        <div>
+            @foreach ($job->tags as $tag)
+                <x-tag :$tag size='small'/>
+            @endforeach
+    
         </div>
         
-       <x-employer-logo width="42"/>
+       <x-employer-logo :employer="$job->employer" :width="42"/>
     </div>
 
 </div>
